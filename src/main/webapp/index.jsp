@@ -4,18 +4,18 @@
 <html>
 <head>
     <%@include file="/WEB-INF/imports/header_imports.jsp" %>
-    <title>Login del Sistema</title>
+    <title>Login | Sistema de Ventas</title>
 </head>
 
 <body>
 
 <c:if test="${not empty requestScope.msg}">
-    <div class="alert alert-success" role="alert">
-        <p>${requestScope.msg}</p>
+    <div class="alert alert-danger" role="alert">
+        <p class="text-center">${requestScope.msg}</p>
     </div>
 </c:if>
 
-<div class="container mt-4 col-lg-4">
+<div class="container d-flex justify-content-center align-content-center align-items-center mt-4 col-lg-4">
     <div class="card col-sm-10">
         <div class="card-body">
             <form class="form-sign" action="${pageContext.request.contextPath}/login" method="post">

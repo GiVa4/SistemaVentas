@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath()+"/home");
             } else {
                 //Se envia el error de datos incorrectos
-                request.setAttribute("msg", "'\u00a1Los datos ingresados son incorrectos!'");
+                request.setAttribute("msg", "\u00a1Los datos ingresados son incorrectos!");
                 //Se redirecciona al login
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
