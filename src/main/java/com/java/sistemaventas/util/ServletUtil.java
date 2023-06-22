@@ -1,6 +1,7 @@
 package com.java.sistemaventas.util;
 
 import com.java.sistemaventas.modelos.Empleado;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -31,5 +32,23 @@ public class ServletUtil {
     public static Empleado getSessionEmpleado(HttpServletRequest request) {
         HttpSession session = request.getSession();
         return (Empleado) session.getAttribute("empleado");
+    }
+
+    public static void goToJsp(HttpServletRequest request, HttpServletResponse response, String fileName) throws ServletException, IOException {
+
+        try {
+            request.getServletContext().getRequestDispatcher("/WEB-INF/" + fileName + ".jsp").forward(request, response);
+        } catch (NullPointerException e) {
+            sendError(response);
+        }
+    }
+
+    public static void goToController(HttpServletRequest request, HttpServletResponse response, String controller) throws IOException {
+
+        try {
+            response.sendRedirect(request.getContextPath() + "/" + controller);
+        } catch (NullPointerException e) {
+            sendError(response);
+        }
     }
 }
