@@ -7,10 +7,9 @@ package com.java.sistemaventas.DAO;
 import com.java.sistemaventas.modelos.Empleado;
 import com.java.sistemaventas.util.ExcepcionSQL;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmpleadoDAO {
     private Connection conn;
@@ -37,6 +36,25 @@ public class EmpleadoDAO {
         }
 
         return empleado;
+    }
+
+    public List<Empleado> findAll() {
+        List<Empleado> empleados = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from empleado");
+
+            while (rs.next()) {
+                Empleado empleado = getEmpleado(rs);
+                empleados.add(empleado);
+            }
+
+        } catch (SQLException e) {
+            throw new ExcepcionSQL(e.getMessage(), e.getCause());
+        }
+
+        return empleados;
     }
 
     public static Empleado getEmpleado(ResultSet rs) throws SQLException {
