@@ -1,4 +1,4 @@
-package com.java.sistemaventas.controlador;
+package com.java.sistemaventas.controladores;
 
 import com.java.sistemaventas.modelos.Empleado;
 import jakarta.servlet.ServletException;

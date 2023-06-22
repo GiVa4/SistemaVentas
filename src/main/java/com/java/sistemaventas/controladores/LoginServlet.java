@@ -1,4 +1,4 @@
-package com.java.sistemaventas.controlador;
+package com.java.sistemaventas.controladores;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 //Se guardan los datos del usuario en la sesion
                 session.setAttribute("empleado", empleado);
-                response.sendRedirect(request.getContextPath()+"/principal");
+                response.sendRedirect(request.getContextPath()+"/home");
             } else {
                 //Se envia el error de datos incorrectos
                 request.setAttribute("msg", "'\u00a1Los datos ingresados son incorrectos!'");

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Inicio | Sistema de Ventas</title>
     <%@include file="/WEB-INF/imports/header_imports.jsp" %>
 </head>
 
