@@ -6,10 +6,7 @@ import com.java.sistemaventas.modelos.Producto;
 import com.java.sistemaventas.modelos.Ventas;
 import com.java.sistemaventas.util.ExcepcionSQL;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +33,35 @@ public class VentasDAO {private Connection conn;
         }
 
         return venta;
+    }
+
+    public void add(Ventas ventas) {
+        String sql;
+
+        if (ventas.getIdVentas()!=0 && ventas.getIdVentas() > 0) {
+            sql = "update ventas set IdCliente = ?, IdEmpleado = ?, NumeroSerie = ?, FechaVentas, Monto, Estado = ?  where IdVentas = ?";
+        } else {
+            sql = "insert into ventas (IdCliente, IdEmpleado, NumeroSerie, FechaVentas, Monto, Estado) values (?,?,?,?,?,?)";
+        }
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, ventas.getCliente().getIdCliente());
+            stmt.setInt(2, ventas.getEmpleado().getIdEmpleado());
+            stmt.setString(3, ventas.getNumeroSerie());
+            //stmt.setTimestamp(4, new Timestamp(valueOf(ventas.getFechaVentas())));arreglar
+            stmt.setDouble(5, ventas.getMonto());
+            stmt.setString(6, ventas.getEstado());
+
+            if (ventas.getIdVentas() != 0 && ventas.getIdVentas() > 0) {
+                stmt.setInt(7, ventas.getIdVentas());
+            }
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new ExcepcionSQL(e.getMessage(), e.getCause());
+        }
     }
 
     public static Ventas getVentas(ResultSet rs) throws SQLException {
