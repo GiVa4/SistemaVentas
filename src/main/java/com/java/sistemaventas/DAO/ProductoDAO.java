@@ -55,21 +55,21 @@ public class ProductoDAO {
     public void add(Producto producto) {
         String sql;
 
-        if (producto.getIdProducto() != null && producto.getIdProducto() > 0) {
-            sql = "update almacen set codigo = ?, existencia = ?, nombre = ?, precio = ?  where id = ?";
+        if (producto.getIdProducto()!=0 && producto.getIdProducto() > 0) {
+            sql = "update producto set Nombres = ?, Precio = ?, Stock = ?, Estado = ?  where IdProducto = ?";
         } else {
-            sql = "insert into almacen (codigo, existencia, nombre, precio) values (?,?,?,?)";
+            sql = "insert into producto (Nombres, Precio, Stock, Estado) values (?,?,?,?)";
         }
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, producto.getCodigo());
-            stmt.setString(2, producto.getExistencia().toString());
-            stmt.setString(3, producto.getNombre());
-            stmt.setDouble(4, producto.getPrecio());
+            stmt.setString(1, producto.getNombres());
+            stmt.setDouble(2, producto.getPrecio());
+            stmt.setInt(3, producto.getStock());
+            stmt.setString(4, producto.getEstado());
 
-            if (producto.getId() != null && producto.getId() > 0) {
-                stmt.setInt(5, producto.getId());
+            if (producto.getIdProducto() != 0 && producto.getIdProducto() > 0) {
+                stmt.setInt(5, producto.getIdProducto());
             }
 
             stmt.executeUpdate();
@@ -82,11 +82,11 @@ public class ProductoDAO {
     private Producto getProducto(ResultSet rs) throws SQLException {
         Producto p = new Producto();
 
-        p.setId(rs.getInt("id"));
-        p.setCodigo(rs.getString("codigo"));
-        p.setExistencia(Existencia.valueOf(rs.getString("existencia")));
-        p.setNombre(rs.getString("nombre"));
-        p.setPrecio(rs.getDouble("precio"));
+        p.setIdProducto(rs.getInt("IdProducto"));
+        p.setNombres(rs.getString("Nombres"));
+        p.setPrecio(rs.getDouble("Precio"));
+        p.setStock(rs.getInt("Stock"));
+        p.setEstado(rs.getString("Estado"));
 
         return p;
     }

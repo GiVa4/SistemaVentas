@@ -25,16 +25,16 @@
                         <a class="nav-link" href="#">Panel Principal <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/controlador?action=Producto" target="myFrame">Producto</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controlador?action=Producto" target="myFrame">Producto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/controlador?action=Empleado" target="myFrame">Empleado</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controlador?action=Empleado" target="myFrame">Empleado</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/controlador?action=Cliente" target="myFrame">Clientes</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controlador?action=Cliente" target="myFrame">Clientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/controlador?action=NuevaVenta" target="myFrame">Nueva Venta</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controlador?action=NuevaVenta" target="myFrame">Nueva Venta</a>
                     </li>
                 </ul>
             </div>
