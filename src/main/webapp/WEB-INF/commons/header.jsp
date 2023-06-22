@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="${pageContext.request.contextPath}/home">
     <img src="${pageContext.request.contextPath}/img/icono.png" width="30" height="30" class="d-inline-block align-top" alt="">
     OnlineShop
   </a>
@@ -10,23 +10,19 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Panel Principal <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home">Panel Principal</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/producto/list"
-           target="myFrame">Producto</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/producto/list">Producto</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/empleado/list"
-           target="myFrame">Empleado</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/empleado/list">Empleado</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/cliente/list"
-           target="myFrame">Clientes</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/cliente/list">Clientes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/venta/add"
-           target="myFrame">Nueva Venta</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/venta/add">Nueva Venta</a>
       </li>
     </ul>
   </div>
