@@ -28,6 +28,10 @@ public class Empleado {
         User = user;
     }
 
+    public Empleado(int idEmpleado) {
+        IdEmpleado = idEmpleado;
+    }
+
     public int getIdEmpleado() {
         return IdEmpleado;
     }

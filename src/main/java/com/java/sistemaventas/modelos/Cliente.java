@@ -10,6 +10,10 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente(int idCliente){
+        IdCliente = idCliente;
+    }
+
     public Cliente(int idCliente, String dni, String nombres, String direccion, String estado) {
         IdCliente = idCliente;
         Dni = dni;

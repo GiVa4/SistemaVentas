@@ -49,7 +49,7 @@ public class VentasDAO {private Connection conn;
             stmt.setInt(1, ventas.getCliente().getIdCliente());
             stmt.setInt(2, ventas.getEmpleado().getIdEmpleado());
             stmt.setString(3, ventas.getNumeroSerie());
-            //stmt.setTimestamp(4, new Timestamp(valueOf(ventas.getFechaVentas())));arreglar
+            stmt.setTimestamp(4, Timestamp.valueOf(ventas.getFechaVentas()));
             stmt.setDouble(5, ventas.getMonto());
             stmt.setString(6, ventas.getEstado());
 

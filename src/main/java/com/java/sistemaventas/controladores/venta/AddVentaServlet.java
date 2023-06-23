@@ -5,6 +5,7 @@ import com.java.sistemaventas.DAO.EmpleadoDAO;
 import com.java.sistemaventas.DAO.VentasDAO;
 import com.java.sistemaventas.modelos.Cliente;
 import com.java.sistemaventas.modelos.Empleado;
+import com.java.sistemaventas.modelos.Ventas;
 import com.java.sistemaventas.util.ServletUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet(name = "AddVentaServlet", value = "/venta/add")
@@ -23,13 +25,19 @@ public class AddVentaServlet extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        if (!action.equals("view_form")){
+        if (!action.equals("view_form")) {
             ServletUtil.sendError(response);
             return;
         }
 
-        sendListsToView(request, clienteDAO, empleadoDAO);
-        ServletUtil.goToJsp(request, response, "add_venta");
+        String showMessageStr = request.getParameter("showMsg");
+
+        if (!showMessageStr.equals("true")) {
+            goToAddForm(request, response, clienteDAO, empleadoDAO, false);
+            return;
+        }
+
+        goToAddForm(request, response, clienteDAO, empleadoDAO, true);
     }
 
     @Override
@@ -38,16 +46,39 @@ public class AddVentaServlet extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        if (!action.equals("add")){
+        if (!action.equals("add")) {
             ServletUtil.sendError(response);
             return;
         }
 
-        //addVenta();
+        addVenta(ventasDAO, request);
         ServletUtil.goToController(request, response, "venta/add?action=view_form");
     }
 
-    private void sendListsToView(HttpServletRequest request, ClienteDAO clienteDAO, EmpleadoDAO empleadoDAO){
+    private void addVenta(VentasDAO ventasDAO, HttpServletRequest req) {
+        Ventas ventas = new Ventas(
+                ServletUtil.getId(req),
+                new Cliente(Integer.parseInt(req.getParameter("idCliente"))),
+                new Empleado(Integer.parseInt(req.getParameter("idEmpleado"))),
+                req.getParameter("numero_serie"),
+                LocalDateTime.now(), //fecha venta
+                Double.parseDouble(req.getParameter("monto")),
+                req.getParameter("estado")
+        );
+
+        ventasDAO.add(ventas);
+    }
+
+    private void goToAddForm(HttpServletRequest req, HttpServletResponse resp, ClienteDAO clienteDAO, EmpleadoDAO empleadoDAO, boolean showMessage) throws ServletException, IOException {
+        if (showMessage) {
+            req.setAttribute("msg", "Producto agregado con Exito");
+        }
+
+        sendListsToView(req, clienteDAO, empleadoDAO);
+        ServletUtil.goToJsp(req, resp, "add_venta");
+    }
+
+    private void sendListsToView(HttpServletRequest request, ClienteDAO clienteDAO, EmpleadoDAO empleadoDAO) {
         List<Cliente> clientes = clienteDAO.findAll();
         List<Empleado> empleados = empleadoDAO.findAll();
 

@@ -22,7 +22,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/cliente/list">Clientes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/venta/add">Nueva Venta</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/venta/add?action=view_form">Nueva Venta</a>
       </li>
     </ul>
   </div>
